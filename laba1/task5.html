@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 1 3 6 7 10
+    <script>   
+        //task 1
+        alert(`Плозадь квадрата: ${prompt('Введите число') ** 2}`);
+        
+        //task 3
+        let lenght = prompt('Введите длину стороны квадрата');
+        alert(`Площадь квадрата: ${lenght * lenght}`);
+
+        //task 6 
+        let num = prompt('Введите 3-ёх значное число');
+        alert(`Вторая цифра этого числа: ${num[1]}`);
+
+        //task 7 
+        let number = prompt('Введите 5-значное число');
+        let result = [];
+        result[0] = number[4];
+        for( let i = 1;  i < number.length; i++){
+            result[i] = number[i-1];
+        }
+        alert(result);
+        
+        //task 10 
+        let year = prompt('Введите год:');
+        if (((year % 400 == 0) || (year % 4 == 0)) && !(year % 100 == 0)){
+            alert(`${year} високосный год`);
+        }
+        else{alert(`${year} НЕ високосный год`);}
+
+    </script>
+</body>
+</html>
