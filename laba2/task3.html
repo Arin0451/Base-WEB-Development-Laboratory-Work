@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 23: 2     5    12, 13
+    <script>   
+        //task 3
+        // Customer object
+        let customers = [
+        {
+        'id': 1,
+        'f_name': 'Abby',
+        'l_name': 'Thomas',
+        'gender': 'M',
+        'married': true,
+        'age': 32,
+        'expense': 500,
+        'purchased': ['Shampoo', 'Toys', 'Book']
+        },
+        {
+        'id': 2,
+        'f_name': 'Jerry',
+        'l_name': 'Tom',
+        'gender': 'M',
+        'married': true,
+        'age': 64,
+        'expense': 100,
+        'purchased': ['Stick', 'Blade']
+        },
+        {
+        'id': 3,
+        'f_name': 'Dianna',
+        'l_name': 'Cherry',
+        'gender': 'F',
+        'married': true,
+        'age': 22,
+        'expense': 1500,
+        'purchased': ['Lipstik', 'Nail Polish', 'Bag', 'Book']
+        },
+        {
+        'id': 4,
+        'f_name': 'Dev',
+        'l_name': 'Currian',
+        'gender': 'M',
+        'married': true,
+        'age': 82,
+        'expense': 90,
+        'purchased': ['Book']
+        },
+        {
+        'id':5,
+        'f_name': 'Maria',
+        'l_name': 'Gomes',
+        'gender': 'F',
+        'married': false,
+        'age': 7,
+        'expense': 300,
+        'purchased': ['Toys']
+        }
+        ];
+
+    //task 12
+    const youngestCustomer = customers.find(customer => customer.age === Math.min(...customers.map(customer => customer.age)));
+    alert(`Самый младший покупатель: ${youngestCustomer.f_name} ${youngestCustomer.l_name}, возраст: ${youngestCustomer.age}`); 
+
+    //task 13
+    const totalMarriedExpense = customers
+    .filter(customer => customer.married)        
+    .map(customer => customer.expense)          
+    .reduce((sum, expense) => sum + expense, 0); 
+
+    alert(`Общая сумма расходов женатых клиентов: ${totalMarriedExpense}`);
+
+
+    </script>
+</body>
+</html>

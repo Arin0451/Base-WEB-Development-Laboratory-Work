@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>   
+    <body> 23: 2     5    12, 13
+        //task 1
+        let array1 = [];
+        for (let i = 0; i < 5; i++ ) {
+             array1[i] = prompt('Введите значение для элемента массива:');
+        }
+        alert(`Введенный массив: [${array1}]`);
+
+        for (let i = 0; i < array1.length; i++) {
+            if (array1[i] % 3 == 0){
+                array1[i] *= i;
+            }
+        }
+        alert(`Результат обработки: [${array1}]`);
+
+        var sum = 0;
+        for (let i = 0; i < array1.length; i++) {
+            sum += array1[i];
+        }
+        alert(`Среднее арифметическое: [${sum / array1.length}]`);
+    </script>
+</body>
+</html>
