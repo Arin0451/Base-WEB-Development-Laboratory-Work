@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 20px;
+        }
+
+        table{
+            border: 3px black solid;
+            border-collapse: collapse;
+        }
+
+        th{
+            border: 2px black solid;
+        }
+
+        td{
+            border: 2px black solid;
+        }
+        
+        .highlight{
+            background-color: rgba(249, 74, 74, 0.514);
+        }
+    </style>
+</head>
+<body>
+    <table id="table">
+        <thead>
+            <th>id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Пол</th>
+            <th>Женат</th>
+            <th>Возраст</th>
+            <th>Сумма</th>
+            <th>Покупки</th>
+        </thead>
+        <tbody id="table-body">
+            <tr class="table-tr">
+                <td>001</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+    let customers = [
+    {
+        'id': 0o1,
+        'f_name': 'Abby',
+        'l_name': 'Thomas',
+        'gender': 'M',
+        'married': true,
+        'age': 32,
+        'expense': 500,
+        'purchased': ['Shampoo', 'Toys', 'Book']
+    },
+    {
+        'id': 0o2,
+        'f_name': 'Jerry',
+        'l_name': 'Tom',
+        'gender': 'M',
+        'married': true,
+        'age': 64,
+        'expense': 100,
+        'purchased': ['Stick', 'Blade']
+    },
+    {
+        'id': 0o3,
+        'f_name': 'Dianna',
+        'l_name': 'Cherry',
+        'gender': 'F',
+        'married': true,
+        'age': 22,
+        'expense': 1500,
+        'purchased': ['Lipstik', 'Nail Polish', 'Bag', 'Book']
+    },
+    {
+        'id': 0o4,
+        'f_name': 'Dev',
+        'l_name': 'Currian',
+        'gender': 'M',
+        'married': true,
+        'age': 82,
+        'expense': 90,
+        'purchased': ['Book']
+    },
+    {
+        'id': 0o5,
+        'f_name': 'Maria',
+        'l_name': 'Gomes',
+        'gender': 'F',
+        'married': false,
+        'age': 7,
+        'expense': 300,
+        'purchased': ['Toys']
+    }
+    ];
+
+
+    const tableBody = document.getElementById('table-body');
+    const tableRows = tableBody.getElementsByClassName('table-tr'); 
+
+    for (let i = 0; i < customers.length; i++){  //i - номер строки
+        let j = 0; //номер столбца
+        for (const key in customers[i]) {
+            tableRows[i].children[j].textContent = customers[i][key];
+            j++; 
+            if (customers[i]['purchased'].includes('Book')){
+                tableRows[i].children[7].classList.add('highlight');
+            }
+        }
+    }   
+    </script>
+</body>
+</html>
