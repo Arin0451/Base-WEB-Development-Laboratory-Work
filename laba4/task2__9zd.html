@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>   
+<!-- 10 вариант 1зд: 4 9    2зд: 5 9    3зд: 10 11  -->
+<style>
+    .main{
+        margin: 0 auto 0 auto;
+        width: 400px;
+        height: 150px;
+        background-color: #fbf2e9;
+        padding: 20px;
+    }
+
+    .progress-bar{
+        width: auto;
+        height: 40px;
+        background-color: aliceblue;
+        border: 2px solid #b2b2b3;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .progress{
+        width: 20%;
+        height: 40px;
+        border-radius: 3px;
+        background-color: #008a8a;
+    }
+
+    #addPercentButton{
+        font-size: 20px;
+        width: 400px;        
+    }    
+</style>
+<body>    
+    <div class="main">
+        <div class="progress-bar">
+            <div class="progress"></div>
+            <div class="progress--left"></div>
+        </div>
+        <button id="addPercentButton">add 5 percent</button>
+        </div>
+</body>
+<script>
+    let counter = 20;
+    const div = document.querySelector('.progress');   
+    function addPercent(){
+        if (counter<100) {
+            counter+=5;
+            div.style.width = `${counter}%`;
+        };
+    }
+    addPercentButton.addEventListener("click", addPercent); 
+</script>
+</html>

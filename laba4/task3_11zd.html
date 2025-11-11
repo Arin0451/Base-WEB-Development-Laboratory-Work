@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 20px;
+        }
+        .action-block{
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        table{
+            border: 3px black solid;
+            border-collapse: collapse;
+        }
+
+        th{
+            border: 2px black solid;
+        }
+
+        td{
+            border: 2px black solid;
+        }
+        
+        .highlight{
+            background-color: rgba(249, 74, 74, 0.514);
+        }
+
+        section{
+            margin-bottom: 40px;
+            border: 2px black solid;
+        }
+    </style>
+</head>
+<body>
+    <div class="action-block">
+            <div><input type="checkbox" id="married-checkbox"  onchange="filter()"> женат</div>
+            <button id="filter-button" onclick="filter()">отфильтровать</button>
+            <button id="reset-button" onclick="reset()">сбросить</button>
+    </div>
+    
+    <table id="table">
+        <thead>
+            <th>id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Пол</th>
+            <th>Женат</th>
+            <th>Возраст</th>
+            <th>Сумма</th>
+            <th>Покупки</th>
+        </thead>
+        <tbody id="table-body">
+        </tbody>        
+    </table>
+<script>
+    let customers = [
+    {
+        'id': 0o1,
+        'f_name': 'Abby',
+        'l_name': 'Thomas',
+        'gender': 'M',
+        'married': true,
+        'age': 32,
+        'expense': 500,
+        'purchased': ['Shampoo', 'Toys', 'Book']
+    },
+    {
+        'id': 0o2,
+        'f_name': 'Jerry',
+        'l_name': 'Tom',
+        'gender': 'M',
+        'married': true,
+        'age': 64,
+        'expense': 100,
+        'purchased': ['Stick', 'Blade']
+    },
+    {
+        'id': 0o3,
+        'f_name': 'Dianna',
+        'l_name': 'Cherry',
+        'gender': 'F',
+        'married': true,
+        'age': 22,
+        'expense': 1500,
+        'purchased': ['Lipstik', 'Nail Polish', 'Bag', 'Book']
+    },
+    {
+        'id': 0o4,
+        'f_name': 'Dev',
+        'l_name': 'Currian',
+        'gender': 'M',
+        'married': true,
+        'age': 82,
+        'expense': 90,
+        'purchased': ['Book']
+    },
+    {
+        'id': 0o5,
+        'f_name': 'Maria',
+        'l_name': 'Gomes',
+        'gender': 'F',
+        'married': false,
+        'age': 7,
+        'expense': 300,
+        'purchased': ['Toys']
+    },
+    {
+        'id': 0o6,
+        'f_name': 'Abby',
+        'l_name': 'Thomas',
+        'gender': 'M',
+        'married': true,
+        'age': 32,
+        'expense': 500,
+        'purchased': ['Shampoo', 'Toys', 'Book']
+    }
+    ];
+    
+    const tableBody = document.getElementById('table-body');
+    const tableRows = tableBody.getElementsByClassName('table-tr'); 
+    
+    function reset(){
+        for (let i = 0; i < customers.length; i++) {
+            tableRows[i].classList.remove('hidden'); 
+        }   
+    }        
+ 
+    function filter(){
+        reset();
+        marriedStatus = document.getElementById('married-checkbox').checked;
+        for (let i = 0; i < customers.length; i++) {
+            if (marriedStatus){
+                if (!customers[i].married && marriedStatus) {
+                    tableRows[i].classList.add('hidden'); 
+                }
+            }
+        }    
+    }
+
+    for (let i = 0; i < customers.length; i++){  //i - номер строки
+        let j = 0; //номер столбца
+        tableBody.insertAdjacentHTML('beforeend', `
+            <tr class="table-tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>`);
+        for (const key in customers[i]) {
+            tableRows[i].children[j].textContent = customers[i][key];
+            j++; 
+        }
+    }       
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .generator{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main{
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto 20px auto;
+        width: 500px;
+        height: 150px;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #bdc1c6;
+    }
+
+    .result{
+        display: flex;
+        justify-content: left;
+        width: 70%;
+        height: auto;
+        align-items: center;
+        padding: 15px;
+        font-size: 40px;
+        color: #bdc1c6;
+    }
+
+    .inputs{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        width: 20%;
+    }
+    
+    .min{
+        color: #707070;
+        border-bottom: 1px #707070 solid ;
+    }
+
+    .max{
+        color: #707070;
+        border-bottom: 1px #707070 solid ;
+    }
+
+    input{font-size: 20px;
+        border: none;
+        width: 100%;
+    }
+
+    button{
+        margin: 0 auto 0 auto;
+        padding: 15px;
+        font-size: 15px;
+        width: 540px;      
+        background-color: #1a73e8; 
+        color: #ffffff;
+        text-transform: uppercase; 
+        border: none;
+
+    }    
+</style>
+</head>   
+<!-- 10 вариант 1зд: 4 9    2зд: 5 9    3зд: 10 11  -->
+<body>    
+    <div class="generator">
+        <div class="main">
+            <div class="result">6</div>
+            <div class="inputs">
+                <div class="min">
+                    Min
+                    <input id="min-input" type="text" value="1">
+                </div>
+                <div class="max">
+                    Max
+                    <input id="max-input" type="text" value="4">
+                </div>
+            </div>
+        </div>
+        <button id="generateButton">Generate</button>
+    </div>
+</body>
+<script>
+    function generateNumber(){
+        let result = document.querySelector('.result');
+        let min = parseInt(document.getElementById('min-input').value);
+        let max = parseInt(document.getElementById('max-input').value);
+        result.textContent = Math.floor(Math.random() * (max - min)) + min;
+    }
+    generateButton.addEventListener("click", generateNumber);
+</script>
+</html>

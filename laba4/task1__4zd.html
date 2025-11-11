@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>   
+<!-- 10 вариант 1зд: 4 9    2зд: 5 9    3зд: 10 11  -->
+<body>
+    
+    <div>
+        <input onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')" type="text" class="text-input">
+        <input onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')" type="text" class="text-input">
+        <input onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')" type="text" class="text-input">
+        <input onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')" type="text" class="text-input">
+    </div>
+<style>
+    .text-input{
+        font-size: 40px;
+        margin: 10px;
+        border: 2px solid gray;
+    }
+    .input-focus{
+        border: 2px solid blue ;
+        background-color: #ccc;
+        outline: 2px solid blue;
+    }
+</style>
+</body>
+</html>
