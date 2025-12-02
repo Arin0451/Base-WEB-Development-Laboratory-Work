@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+        .product-form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 400px;
+        }
+        .submit-button{
+            width: 120px;
+        }
+    </style>
+</head>
+<body> <!--  10вариант: 3 5 7 -->
+    <form action="summary.html" method="get" id="product-form" class="product-form">
+        <input type="text" name="ProductName" id="ProductName" placeholder="Название продукта" minlength="3" required>
+        <input type="text" name="quantity" id="quantity" minlength="1" maxlength="2" placeholder="1-99" required>
+
+        <h3>Базовые опции (выберите минимум 1):</h3>
+
+        <div class="option-checkbox">
+            <input type="checkbox" name="optionA" id="optionA" value="A" class="basic-option">
+            <label for="optionA">Опция А</label>
+        </div> 
+        
+        <div class="option-checkbox">
+            <input type="checkbox" name="optionB" id="optionB" value="B" class="basic-option">
+            <label for="optionB">Опция В</label>
+        </div>
+        
+        <div class="option-checkbox">
+            <input type="checkbox" name="optionC" id="optionC" value="C" class="basic-option">
+            <label for="optionC">Опция С</label>
+        </div> 
+
+        <h3>Дополнительная опция:</h3>
+        <div class="option-checkbox">
+            <input type="checkbox" name="premium" id="premium" value="premium"> 
+            <label for="premium">Premium</label>
+        </div>
+
+        <input type="hidden" name="selectedOptions" id="selectedOptionsInput">
+        <button type="submit" id="submit-button" class="submit-button">отправить</button>
+    </form>
+
+    <script>
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            const checkboxes = this.querySelectorAll('input[type="checkbox"]');
+            let count = 0;
+            
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    count++;
+                }
+            }
+            
+            document.getElementById('selectedOptionsInput').value = count;
+            
+            const optionA = this.querySelector('input[name="optionA"]');
+            const premium = this.querySelector('input[name="premium"]');
+            
+            const basicChecked = 
+                this.querySelector('input[name="optionA"]:checked') ||
+                this.querySelector('input[name="optionB"]:checked') ||
+                this.querySelector('input[name="optionC"]:checked');
+            
+            if (!basicChecked) {
+                event.preventDefault();
+                alert('Выберите минимум 1 опцию!');
+                return;
+            }
+            
+            if (premium.checked && !optionA.checked) {
+                event.preventDefault();
+                alert('Для Premium нужна Опция А!');
+                return;
+            }
+            
+        });
+    </script>
+</body>
+</html>

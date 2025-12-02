@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Оплата прошла успешно!</h1>
+    <div id="result"></div>
+</body>
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);       
+
+        const cardHolder = urlParams.get('cardHolder');
+        lastFourDigits = urlParams.get('cardNumber');
+        lastFourDigits = lastFourDigits.slice(-4);
+        const shippingIndex = urlParams.get('shippingIndex');
+
+        const paymentDetails = document.getElementById('paymentDetails');
+        
+        document.getElementById('result').innerHTML = `
+            <p><strong>Владелец карты:</strong> ${cardHolder}</p>
+            <p><strong>Номер карты:</strong> **** **** **** ${lastFourDigits}</p>
+            <p><strong>Почтовый индекс:</strong> ${shippingIndex}</p>
+        `;
+    </script>
+</html>
