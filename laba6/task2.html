@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><button name="Товар 1">Товар 1</button></li>
+            <li><button name="Товар 2">Товар 2</button></li>
+            <li><button name="Товар 3">Товар 3</button></li>
+            <li><button name="Товар 4">Товар 4</button></li>
+            <li><button name="Товар 5">Товар 5</button></li>
+        </ul>
+    </div>
+    Недавно просмотренные: 
+    <div class="recentl-list"></div>
+</body>
+
+<script>
+    const buttons = document.querySelectorAll('button');
+    const divRecntly = document.querySelector('.recentl-list');
+    recentlySaw = [];
+
+    recentlySaw = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    divRecntly.textContent = `${recentlySaw[recentlySaw.length -1]} ${recentlySaw[recentlySaw.length -2]} ${recentlySaw[recentlySaw.length -3]}`
+
+    function addToRecently(){
+        const index = recentlySaw.indexOf(this.name);
+    
+        if (index !== -1) {
+            recentlySaw.splice(index, 1);
+        }
+        recentlySaw.push(this.name);
+        divRecntly.textContent = `${recentlySaw[recentlySaw.length -1]} ${recentlySaw[recentlySaw.length -2]} ${recentlySaw[recentlySaw.length -3]}  `
+        localStorage.setItem('recentlyViewed', JSON.stringify(recentlySaw));
+    }
+    
+    for (const button of buttons) {
+        button.addEventListener('click', addToRecently)
+    }
+
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простое модальное окно</title>
+</head>
+<style>
+    #modal{
+        display: none;
+        position: fixed; 
+        background: white; 
+        padding: 20px; 
+        border: 2px solid #ccc; 
+        border-radius: 10px        
+    }
+</style>
+<body>
+    <h1>Наш сайт</h1>
+    <p>Контент страницы...</p>
+
+    <div id="modal" >
+        <h3>Скидка 10% для новых клиентов!</h3>
+        <button onclick="closeModal()">Закрыть</button>
+    </div>
+
+    <script>
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? match[2] : null;
+        }
+        
+        function setCookie(name, value) {
+            const date = new Date();
+            date.setMonth(date.getMonth() + 1);
+            document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            setCookie('promoShown', 'true');
+        }
+        
+        window.onload = function() {
+            if (!getCookie('promoShown')) {
+                document.getElementById('modal').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>

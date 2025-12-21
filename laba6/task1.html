@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+        
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #UIForm{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .submit-button{
+            width: 140px;
+        }
+    </style>
+</head>
+<body> 
+    <h1>Настройки интерфейса</h1>
+    <form action="" id="UIForm">
+        <div class="select-color">
+            Выберите цвет фона <br>
+            <select name="color" id="select-color">
+                <option value="white">белый</option>
+                <option value="light-gray">светло-серый</option>
+                <option value="beige">бежевый</option>
+            </select>
+        </div>
+            
+        <div class="fontSizeSelect">
+            Выбор размера шрифта
+            <div>
+                <input type="radio" name="fontSize" id="14pxfontSize" value="14px">
+                <label for="14pxfontSize">14px</label>
+            </div>
+            <div>
+                <input type="radio" name="fontSize" id="16pxfontSize" value="16px">
+                <label for="16pxfontSize">16px</label>
+            </div>
+            <div>
+                <input type="radio" name="fontSize" id="18pxfontSize" value="18px">
+                <label for="18pxfontSize">18px</label>
+            </div>
+        </div>
+
+        <div class="NameInput">
+            Введите свое имя <br>
+            <input type="text" id="nameInput" placeholder="Ваше имя">
+        </div>
+        <button type="submit" id="submit-button">Применить и сохранить</button>
+    </form>
+</body>
+<script>
+    const colorMap = {
+        'white': '#ffffff',
+        'light-gray': '#f5f5f5',
+        'beige': '#f5f5dc'
+    };
+        
+    function loadSettings() {
+        const savedColor = localStorage.getItem('background-color');
+        const savedFontSize = localStorage.getItem('font-size');
+        const savedName = localStorage.getItem('username');
+        
+        const body = document.querySelector('body');
+        const nameInput = document.querySelector('#nameInput');
+        
+        if (savedColor) {
+            body.style.backgroundColor = colorMap[savedColor] || savedColor;
+            document.querySelector('#select-color').value = savedColor;
+        }
+        
+        if (savedFontSize) {
+            body.style.fontSize = savedFontSize;
+            const radios = document.querySelectorAll('input[name="fontSize"]');
+            radios.forEach(radio => {
+                if (radio.value === savedFontSize) {
+                    radio.checked = true;
+                }
+            });
+        }
+        
+        if (savedName) {
+            nameInput.value = savedName;
+        }
+    }
+
+    function accept_changes() {
+        const body = document.querySelector('body');
+        const color = document.querySelector('#select-color').value;
+        const fontSizeRadios = document.querySelectorAll('input[name="fontSize"]');
+        const name = document.querySelector('#nameInput');
+        
+        let fontSize = '16px';
+        
+        for (const radio of fontSizeRadios) {
+            if (radio.checked) {
+                fontSize = radio.value;
+            }
+        }
+
+        body.style.backgroundColor = colorMap[color] || color;
+        body.style.fontSize = fontSize;
+
+        localStorage.setItem('background-color', color);
+        localStorage.setItem('font-size', fontSize);
+        localStorage.setItem('username', name.value);
+
+        console.log('Настройки сохранены');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSettings);
+
+    const submitButton = document.querySelector('#submit-button');
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        accept_changes();
+    });
+
+</script>
+</html>

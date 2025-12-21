@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .add-new-task{
+        display: flex;
+        justify-content: space-between;
+        border: 1px black solid;
+        width: 400px;
+        padding: 10px;
+    }
+
+    #task-text-input{
+        width: 60%;
+    }
+    li{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px black solid;
+        padding: 5px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .completed .task-item {
+        text-decoration: line-through;
+        color: gray;
+    }
+    
+    .delete-btn {
+        background: none;
+        border: none;
+        color: red;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    
+    .task-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+</style>
+<body>
+    <div class="add-new-task">
+        <input id="task-text-input" type="text">
+        <button id="add-button">Добавить</button>
+    </div>
+    <select name="status" id="select-status">
+        <option value="all">все</option>
+        <option value="active">активные</option>
+        <option value="finished">завершенные</option>
+    </select>
+        
+    <ul id="task-list">
+    </ul>
+    
+</body>
+<script>
+    const addButton = document.querySelector('#add-button');
+    const taskTextInput = document.querySelector('#task-text-input');
+    const selectStatus = document.querySelector('#select-status');
+    const taskList = document.querySelector('#task-list');
+    
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    function renderTasks() {
+        const filter = selectStatus.value;
+        taskList.innerHTML = '';
+        
+        const filteredTasks = tasks.filter(task => {
+            if (filter === 'active') return !task.completed;
+            if (filter === 'finished') return task.completed;
+            return true;
+        });
+        
+        for (const task of filteredTasks) {
+            taskList.insertAdjacentHTML('beforeend',
+            `<li data-id='${task.id}' class="${task.completed ? 'completed' : ''}">
+                <div class="task-content">
+                    <input class="checkbox-complete" type="checkbox" ${task.completed ? 'checked' : ''}>
+                    <div class="task-item">${task.text}</div>
+                </div>
+                <button class="delete-btn">×</button>
+            </li>`);
+        }
+        
+        document.querySelectorAll('.checkbox-complete').forEach(checkbox => {
+            checkbox.addEventListener('change', updateTaskStatus);
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', deleteTask);
+        });
+    }
+
+    renderTasks();
+
+    function addTask() {
+        let text = taskTextInput.value;
+        if (!text.trim()) return;
+        
+        let task = {
+            id: Date.now(),
+            text: text,
+            completed: false
+        };
+
+        tasks.push(task);   
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        renderTasks(); 
+        taskTextInput.value = '';
+    }
+
+    function updateTaskStatus() {
+        const li = this.closest('li');
+        const taskId = parseInt(li.dataset.id);
+        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        
+        if (taskIndex !== -1) {
+            tasks[taskIndex].completed = this.checked;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks(); 
+        }
+    }
+    
+    function deleteTask() {
+        const li = this.closest('li');
+        const taskId = parseInt(li.dataset.id);
+        
+        tasks = tasks.filter(task => task.id !== taskId);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    addButton.addEventListener('click', addTask);
+    
+    taskTextInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+    
+    selectStatus.addEventListener('change', renderTasks);
+</script>
+</html>
