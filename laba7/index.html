@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+        }
+        
+        .input-zone, .output-zone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        label {
+            width: 60px; 
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        input, select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input {
+            width: 120px;
+        }
+        
+        select {
+            min-width: 200px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+
+        button{
+            align-self: center;
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+    </style>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="storage.js"></script>
+    <script type="module" src="api.js"></script>
+</head>
+<body>
+    <h1>Конвертер валют</h1>
+    <div class="main">
+        <div class="input-zone">
+            <label>From:</label>
+            <input type="text" id="quantity-input">
+            <select name="from-currency" id="from-currency-select">
+                <option value="USD">USD - Доллар США</option>
+                <option value="EUR">EUR - Евро</option>
+                <option value="RUB">RUB - Российский рубль</option>
+                <option value="GBP">GBP - Фунт стерлингов</option>
+                <option value="JPY">JPY - Японская иена</option>
+            </select>
+        </div>
+        <div class="output-zone">
+            <label>To:</label>
+            <input type="text" id="quantity-output">
+            <select name="to-currency" id="to-currency-select">
+                <option value="USD">USD - Доллар США</option>
+                <option value="EUR">EUR - Евро</option>
+                <option value="RUB">RUB - Российский рубль</option>
+                <option value="GBP">GBP - Фунт стерлингов</option>
+                <option value="JPY">JPY - Японская иена</option>
+            </select>
+        </div>
+    </div>
+    
+</body>
+</html>
